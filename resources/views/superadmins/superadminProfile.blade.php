@@ -27,6 +27,24 @@
 @endsection
 
 @section('content')
+    <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid">
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#">HSTU Automation Program</a>
+
+                <!-- Navbar links -->
+                <ul class="navbar-nav ml-auto flex-row">
+                    {{--<li class="nav-item mr-2">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
+                    </li>--}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <?php
     $user = \App\Models\User::find(session()->get('loginUser'))->first();
     ?>
@@ -59,7 +77,7 @@
                             </ul>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Change Password</a>
+                            <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change Password</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger float-right">Logout</a>
                             <?php
                             $r = session()->get('user_role');
@@ -104,6 +122,24 @@
                 <div class="card-body">
                     <h5 class="card-title">Search User</h5>
                     <p class="card-text">You can search for Users to edit their information</p>
+                    <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Go to Search User</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-deck mt-4 mb-4">
+            <div class="card card-centered">
+                <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                <div class="card-body">
+                    <h5 class="card-title">Faculties</h5>
+                    <p class="card-text">Find and edit Faculties here. It is easy to update from here</p>
+                    <a href="{{ route('selectFaculty') }}" class="btn btn-primary">Go to Search User</a>
+                </div>
+            </div>
+            <div class="card card-centered">
+                <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                <div class="card-body">
+                    <h5 class="card-title">Departments</h5>
+                    <p class="card-text">Find and edit Departments here. It is easy to update from here</p>
                     <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Go to Search User</a>
                 </div>
             </div>

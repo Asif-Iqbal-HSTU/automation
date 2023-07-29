@@ -85,7 +85,7 @@
                             $r = session()->get('user_role');
                             ?>
                             <?php if ($r === "teacher"): ?>
-                            <a href="#" class="btn btn-primary">Change Password</a>
+                            <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change Password</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger float-right">Logout</a>
                             <?php endif; ?>
                             <?php if ($r === "superAdmin"): ?>

@@ -13,6 +13,24 @@
 @endsection
 
 @section('content')
+    <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid">
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#">HSTU Automation Program</a>
+
+                <!-- Navbar links -->
+                <ul class="navbar-nav ml-auto flex-row">
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" href="{{ route('homePage') }}"><i class="fa-solid fa-house-user fa-xl"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <div
         class="container-fluid d-flex flex-column justify-content-center align-items-center min-vh-100 col-md-8 offset-md-2">
         <div class="card col-md-4 mt-3">
@@ -42,7 +60,8 @@
                         <label for="newPassword" class="form-label">New Password</label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="Enter New Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Change Password</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
+                    <a href="{{ route('home') }}" class="btn btn-secondary float-right">Go to Login</a>
                 </form>
             </div>
         </div>

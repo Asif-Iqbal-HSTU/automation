@@ -23,6 +23,24 @@
 @endsection
 
 @section('content')
+    <div class="container">
+        <nav class="navbar navbar-dark bg-primary">
+            <div class="container-fluid">
+                <!-- Navbar brand -->
+                <a class="navbar-brand" href="#">HSTU Automation Program</a>
+
+                <!-- Navbar links -->
+                <ul class="navbar-nav ml-auto flex-row">
+                    {{--<li class="nav-item mr-2">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
+                    </li>--}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     @if ($user)
         <div class="container">
             <div class="row mt-4">
@@ -50,14 +68,14 @@
                                             <p><strong>Department:</strong>
                                                 @foreach ($departments as $department)
                                                     @if ($department->id == $student->department)
-                                                        {{ $department->name }}
+                                                        <a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $department->name }}</a>
                                                     @endif
                                                 @endforeach
                                             </p>
                                             <p><strong>Faculty:</strong>
                                                 @foreach ($faculties as $faculty)
                                                     @if ($faculty->id == $student->faculty)
-                                                        {{ $faculty->name }}
+                                                        <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
                                                     @endif
                                                 @endforeach
                                             </p>

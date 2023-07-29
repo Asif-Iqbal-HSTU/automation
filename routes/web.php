@@ -22,12 +22,16 @@ Route::post('/loginUser',[\App\Http\Controllers\LoginController::class,'loginUse
 
 
 Route::middleware(['user.auth'])->group(function(){
-
+    Route::get('/homePage',[\App\Http\Controllers\HomeController::class,'currentUser'])->name('homePage');
     Route::get('/logout',[\App\Http\Controllers\LoginController::class,'logout'])->name('logout');
     Route::get('/editPassword/{uid}', [\App\Http\Controllers\LoginController::class,'editPassword'])->name('editPassword');
     Route::put('/updatePassword/{uid}', [\App\Http\Controllers\LoginController::class,'updatePassword'])->name('updatePassword');
     //Route::get('/updatePasswordPage',[\App\Http\Controllers\LoginController::class,'gotoUpdatePassword'])->name('updatePasswordPage');
     //Route::put('/updatePassword', [\App\Http\Controllers\LoginController::class,'updatePassword'])->name('updatePassword');
+    Route::get('/selectFaculty',[\App\Http\Controllers\FacultyController::class,'selectFacultyPage'])->name('selectFaculty');
+    //Route::post('/faculty',[\App\Http\Controllers\FacultyController::class,'loadFaculty'])->name('faculty');
+    Route::get('/faculty/{facultyID}', [\App\Http\Controllers\FacultyController::class,'facultyPage'])->name('faculty2');
+    Route::get('/department/{deptID}', [\App\Http\Controllers\DepartmentController::class,'departmentPage'])->name('department');
 
     Route::middleware(['user.superAdmin:superAdmin'])->group(function () {
         Route::get('/addStudentPage',[\App\Http\Controllers\UserController::class,'addStudentPage'])->name('addStudentPage');
