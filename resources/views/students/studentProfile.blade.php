@@ -12,7 +12,6 @@
             border-radius: 50%;
             margin: 0 auto;
         }
-
         .image-cropper img {
             width: 100%;
             height: auto;
@@ -65,10 +64,11 @@
                                             <p><strong>Level:</strong> {{ $student->level }}</p>
                                             <p><strong>Semester:</strong> {{ $student->semester }}</p>
                                             <p><strong>Session:</strong> {{ $student->session }}</p>
-                                            <p><strong>Department:</strong>
-                                                @foreach ($departments as $department)
-                                                    @if ($department->id == $student->department)
-                                                        <a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $department->name }}</a>
+                                            <p><strong>Degree:</strong>
+                                                @foreach ($degrees as $degree)
+                                                    @if ($degree->id == $student->degree)
+                                                        {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $degree->name }}</a>--}}
+                                                        <a href="#">{{ $degree->name }}</a>
                                                     @endif
                                                 @endforeach
                                             </p>

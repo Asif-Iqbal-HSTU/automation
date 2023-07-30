@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Degree;
 use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\Hall;
@@ -27,8 +28,15 @@ class FacultyController extends Controller
     public function facultyPage($facultyID){
         $faculty = Faculty::where('id', $facultyID)->firstOrFail();
         $departments = Department::all();
+        $degrees = Degree::all();
         $teachers = Teacher::all();
         //$department = Department::all();
-        return view('faculties.faculty', compact('faculty', 'departments', 'teachers' ));
+        return view('faculties.faculty', compact('faculty', 'departments', 'degrees', 'teachers' ));
+    }
+
+    public function getDegrees($faculty)
+    {
+        $degrees = Degree::where('faculty', $faculty)->get();
+        return response()->json($degrees);
     }
 }

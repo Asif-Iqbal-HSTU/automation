@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Degree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Department;
@@ -56,6 +57,7 @@ class LoginController extends Controller
 
         if($user->role == 'student'){
             $departments = Department::all();
+            $degrees = Degree::all();
             $faculties = Faculty::all();
             $halls = Hall::all();
             $uid = $user->uid;
@@ -63,7 +65,7 @@ class LoginController extends Controller
             $address = Address::findOrFail($user->address);
             $student = Student::where('sid', $uid)->first();
             $teacher = Teacher::where('tid', $uid)->first();
-            return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'halls'));
+            return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls'));
         }
 
         if($user->role == 'teacher'){

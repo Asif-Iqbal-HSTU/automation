@@ -89,6 +89,23 @@
                         @endforeach
                     </ul>
                 </div>
+                <div class="card-body">
+                    <h4>Degrees:</h4>
+                    <ul class="list-group list-group-flush">
+                        @foreach ($degrees as $degree)
+                            @if ($degree->faculty == $faculty -> id)
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $department->name }}</a> <br>--}}
+                                            <a href="#">{{ $degree->name }}</a> <br>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
                 <div class="card-footer">
                     <h4 class="">Faculty Notice:</h4>
                     <p>This is a notice</p>

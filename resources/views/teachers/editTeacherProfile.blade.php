@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('titleContent')
-    <title>Add Teacher Page</title>
+    <title>Edit Teacher Info</title>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
     </div>
     <div class="container text-start">
         <br>
-        <h3>Teacher Adding Form</h3>
+        <h3>Teacher Info Update Form</h3>
         <hr>
         <form action="{{ route('updateUser', ['uid' => $user->uid]) }}" method="POST">
             @csrf
@@ -51,10 +51,10 @@
                     <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" value="{{ $user->name }}">
                 </div>
                 <div class="col-lg-4">
-                    <label for="Department" class="form-label">Department</label>
-                    <select name="department" class="form-select" aria-label="Default select example">
-                        @foreach ($departments as $department)
-                            <option value="{{ $department->id }}" {{ $department->id == $teacher->department ? 'selected' : '' }}>{{ $department->name }}</option>
+                    <label for="Faculty" class="form-label">Faculty</label>
+                    <select name="faculty" id="faculty" class="form-select" aria-label="Default select example">
+                        @foreach ($faculties as $faculty)
+                            <option value="{{ $faculty->id }}" {{ $faculty->id == $teacher->faculty ? 'selected' : '' }}>{{ $faculty->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -62,10 +62,10 @@
             <br>
             <div class="row">
                 <div class="col-lg-4">
-                    <label for="Faculty" class="form-label">Faculty</label>
-                    <select name="faculty" class="form-select" aria-label="Default select example">
-                        @foreach ($faculties as $faculty)
-                            <option value="{{ $faculty->id }}" {{ $faculty->id == $teacher->faculty ? 'selected' : '' }}>{{ $faculty->name }}</option>
+                    <label for="Department" class="form-label">Department</label>
+                    <select name="department" id="department" class="form-select" aria-label="Default select example">
+                        @foreach ($departments as $department)
+                            <option value="{{ $department->id }}" {{ $department->id == $teacher->department ? 'selected' : '' }}>{{ $department->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -160,4 +160,22 @@
             <button class="btn btn-primary" type="submit">Update Teacher</button>
         </form>
     </div>
+    <script>
+        document.getElementById('faculty').addEventListener('change', function() {
+            var faculty = this.value;
+            fetch('/departments/' + faculty)
+                .then(response => response.json())
+                .then(data => {
+                    var departmentSelect = document.getElementById('department');
+                    departmentSelect.innerHTML = '';
+
+                    data.forEach(function(department) {
+                        var option = document.createElement('option');
+                        option.value = department.id; // Replace 'id' with your department's primary key
+                        option.text = department.name; // Replace 'name' with the department's name attribute
+                        departmentSelect.appendChild(option);
+                    });
+                });
+        });
+    </script>
 @endsection

@@ -44,6 +44,12 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/editUser/{uid}', [\App\Http\Controllers\UserController::class,'editUser'])->name('editUser');
         Route::put('/updateUser/{uid}', [\App\Http\Controllers\UserController::class,'updateUser'])->name('updateUser');
+        // routes/web.php
+        Route::get('/departments/{faculty}', [\App\Http\Controllers\DepartmentController::class,'getDepartments']);
+        Route::get('/degrees/{faculty}', [\App\Http\Controllers\FacultyController::class,'getDegrees']);
+
+        Route::get('/editDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'editDepartment'])->name('editDepartment');
+        Route::put('/updateDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'updateDepartment'])->name('updateDepartment');
     });
 
 

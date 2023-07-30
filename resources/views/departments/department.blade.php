@@ -86,6 +86,18 @@
                     <h4 class="">Department Notice:</h4>
                     <p>This is a notice</p>
                 </div>
+                <div class="card-footer">
+                    <?php
+                    $r = session()->get('user_role');
+                    ?>
+                    <?php if ($r === "superAdmin"): ?>
+                    <form action="{{ route('editDepartment', ['deptID' => $department->id]) }}" method="GET">
+                        @csrf
+                        <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}
+                        class="btn btn-danger float-right">Edit Department Info</button>
+                    </form>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Degree;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Department;
@@ -29,9 +30,10 @@ class UserController extends Controller
 
     public function addStudentPage(){
         $departments = Department::all();
+        $degrees = Degree::all();
         $faculties = Faculty::all();
         $halls = Hall::all();
-        return view('students.addStudent', compact('departments', 'faculties', 'halls'));
+        return view('students.addStudent', compact('degrees', 'faculties', 'halls'));
     }
 
     public function addTeacherPage(){
@@ -57,8 +59,9 @@ class UserController extends Controller
         $password = Hash::make('password');
         $role = 'student';
         $name = $request->input('name');
-        $department = $request->input('department');
+        //$department = $request->input('department');
         $faculty = $request->input('faculty');
+        $degree = $request->input('degree');
         $level = $request->input('level');
         $semester = $request->input('semester');
         $section = $request->input('section');
@@ -93,7 +96,7 @@ class UserController extends Controller
         // Create Model3 instance
         $student = Student::create([
             'sid' => $uid, // Assuming uid is the student ID
-            'department' => $department,
+            'degree' => $degree,
             'faculty' => $faculty,
             'session' => $session,
             'semester' => $semester,
@@ -170,6 +173,7 @@ class UserController extends Controller
     public function searchUser(Request $request)
     {
         $departments = Department::all();
+        $degrees = Degree::all();
         $faculties = Faculty::all();
         $halls = Hall::all();
 
@@ -186,7 +190,7 @@ class UserController extends Controller
 
             // Pass the retrieved data to the view
             if($user->role == 'student'){
-                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'halls'));
+                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls'));
             }
             elseif($user->role == 'teacher'){
                 return view('teachers.teacherProfile', compact('user', 'address', 'teacher', 'departments', 'faculties'));
@@ -200,6 +204,7 @@ class UserController extends Controller
     public function editUser($uid)
     {
         $departments = Department::all();
+        $degrees = Degree::all();
         $faculties = Faculty::all();
         $halls = Hall::all();
         // Retrieve the Model1 record based on the provided uid
@@ -212,7 +217,7 @@ class UserController extends Controller
         // Pass the retrieved data to the view
         if($user->role == 'student'){
             $student = Student::where('sid', $uid)->firstOrFail();
-            return view('students.editStudentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'halls'));
+            return view('students.editStudentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls'));
         }
         elseif($user->role == 'teacher'){
             $teacher = teacher::where('tid', $uid)->firstOrFail();
@@ -265,6 +270,7 @@ class UserController extends Controller
 
         if($user->role == "student"){
             $department = $request->input('department');
+            $degree = $request->input('degree');
             $faculty = $request->input('faculty');
             $level = $request->input('level');
             $semester = $request->input('semester');
@@ -276,7 +282,8 @@ class UserController extends Controller
 
             $student = Student::where('sid', $uid)->firstOrFail();
             // Update the Model3 record
-            $student->department = $department;
+            //$student->department = $department;
+            $student->degree = $degree;
             $student->faculty = $faculty;
             $student->level = $level;
             $student->semester = $semester;
