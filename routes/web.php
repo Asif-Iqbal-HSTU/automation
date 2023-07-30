@@ -50,6 +50,9 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/editDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'editDepartment'])->name('editDepartment');
         Route::put('/updateDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'updateDepartment'])->name('updateDepartment');
+
+        Route::get('/editFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'editFaculty'])->name('editFaculty');
+        Route::put('/updateFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'updateFaculty'])->name('updateFaculty');
     });
 
 

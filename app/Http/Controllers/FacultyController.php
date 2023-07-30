@@ -39,4 +39,26 @@ class FacultyController extends Controller
         $degrees = Degree::where('faculty', $faculty)->get();
         return response()->json($degrees);
     }
+
+    public function editFaculty($fID)
+    {
+        //dd($deptID);
+        $faculty = Faculty::where('id', $fID)->firstOrFail();
+        $teachers = Teacher::all();
+        return view('faculties.editFaculty', compact('faculty', 'teachers'));
+    }
+
+    public function updateFaculty(Request $request, $fID)
+    {
+        //dd($deptID);
+        //$department = Department::where('id', $deptID)->firstOrFail();
+        //return view('departments.editDepartment', compact('department'));
+        $faculty = Faculty::where('id', $fID)->firstOrFail();
+        $faculty->name = $request->input('name');
+        $faculty->dean = $request->input('dean');
+        $faculty->deanMessage = $request->input('deanMessage');
+        $faculty->save();
+
+        return redirect()->back()->with('success', 'Data updated successfully.');
+    }
 }

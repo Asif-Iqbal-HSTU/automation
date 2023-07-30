@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('titleContent')
-    <title>Edit Teacher Info</title>
+    <title>Edit Department Info</title>
 @endsection
 
 @section('content')
