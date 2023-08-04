@@ -130,17 +130,17 @@
             <div class="card card-centered">
                 <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
                 <div class="card-body">
-                    <h5 class="card-title">Faculties</h5>
+                    <h5 class="card-title">Faculties & Departments</h5>
                     <p class="card-text">Find and edit Faculties here. It is easy to update from here</p>
-                    <a href="{{ route('selectFaculty') }}" class="btn btn-primary">Go to Search User</a>
+                    <a href="{{ route('selectFaculty') }}" class="btn btn-primary">Go to Faculties</a>
                 </div>
             </div>
             <div class="card card-centered">
                 <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
                 <div class="card-body">
-                    <h5 class="card-title">Departments</h5>
-                    <p class="card-text">Find and edit Departments here. It is easy to update from here</p>
-                    <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Go to Search User</a>
+                    <h5 class="card-title">Courses</h5>
+                    <p class="card-text">Create Courses, Course Distributions, edit curriculum from here</p>
+                    <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Go to Courses</a>
                 </div>
             </div>
         </div>

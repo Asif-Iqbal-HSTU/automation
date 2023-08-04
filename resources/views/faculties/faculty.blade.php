@@ -98,7 +98,7 @@
                                     <div class="row">
                                         <div class="col-md-10">
                                             {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $department->name }}</a> <br>--}}
-                                            <a href="#">{{ $degree->name }}</a> <br>
+                                            <a href="{{ route('degree', ['degreeID' => $degree->id]) }}">{{ $degree->name }}</a> <br>
                                         </div>
                                     </div>
                                 </li>

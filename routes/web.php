@@ -33,6 +33,9 @@ Route::middleware(['user.auth'])->group(function(){
     Route::get('/faculty/{facultyID}', [\App\Http\Controllers\FacultyController::class,'facultyPage'])->name('faculty2');
     Route::get('/department/{deptID}', [\App\Http\Controllers\DepartmentController::class,'departmentPage'])->name('department');
 
+    Route::get('/degree/{degreeID}', [\App\Http\Controllers\DegreeController::class,'degreePage'])->name('degree');
+
+
     Route::middleware(['user.superAdmin:superAdmin'])->group(function () {
         Route::get('/addStudentPage',[\App\Http\Controllers\UserController::class,'addStudentPage'])->name('addStudentPage');
         Route::post('/addStudent',[\App\Http\Controllers\UserController::class,'addStudent'])->name('addStudent');
@@ -53,6 +56,9 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/editFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'editFaculty'])->name('editFaculty');
         Route::put('/updateFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'updateFaculty'])->name('updateFaculty');
+
+        Route::get('/createCoursePage/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCoursePage'])->name('createCoursePage');
+        Route::post('/createCourse/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCourse'])->name('createCourse');
     });
 
 

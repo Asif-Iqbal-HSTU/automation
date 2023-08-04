@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Degree;
 use App\Models\Department;
 use App\Models\Faculty;
 use App\Models\Hall;
@@ -20,6 +21,7 @@ class HomeController extends Controller
         //dd($user);
         $departments = Department::all();
         $faculties = Faculty::all();
+        $degrees = Degree::all();
         $halls = Hall::all();
 
         //$uid = $request->input('uid');
@@ -39,7 +41,7 @@ class HomeController extends Controller
 
             // Pass the retrieved data to the view
             if($user->role == 'student'){
-                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'halls'));
+                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'degrees', 'halls'));
             }
             elseif($user->role == 'teacher'){
                 return view('teachers.teacherProfile', compact('user', 'address', 'teacher', 'departments', 'faculties'));
