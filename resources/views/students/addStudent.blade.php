@@ -85,8 +85,8 @@
                     <label for="Current Semester" class="form-label">Current Semester</label>
                     <select class="form-select" aria-label="Default select example" name="semester">
                         <option selected>Open this select menu</option>
-                        <option value="i">I</option>
-                        <option value="ii">II</option>
+                        <option value="I">I</option>
+                        <option value="II">II</option>
                     </select>
                 </div>
             </div>
@@ -96,9 +96,9 @@
                     <label for="Section" class="form-label">Section</label>
                     <select class="form-select" aria-label="Default select example" name="section">
                         <option selected>Open this select menu</option>
-                        <option value="a">A</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
@@ -121,15 +121,15 @@
                     <select class="form-select" aria-label="Default select example" name="residentialStatus">
                         <option selected>Open this select menu</option>
                         <option value="Resident">Resident</option>
-                        <option value="nonResident">Non Resident</option>
+                        <option value="Non-Resident">Non Resident</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
                     <label for="Gender" class="form-label">Gender</label><br>
                     <select class="form-select" aria-label="Default select example" name="gender">
                         <option selected>Open this select menu</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                         <option value="other">Other</option>
                     </select>
                 </div>
@@ -154,7 +154,7 @@
                     <select class="form-select" aria-label="Default select example" name="boardScholarship">
                         <option selected>Open this select menu</option>
                         <option value="yes">Yes</option>
-                        <option value="no">No</option>
+                        <option value="No">No</option>
                     </select>
                     @error('boardScholarship') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>

@@ -11,7 +11,7 @@ class AddCourseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,6 @@ class AddCourseRequest extends FormRequest
             'semester' => 'required',
             'credit' => 'required',
             'type' => 'required',
-            'degree' => 'required',
         ];
     }
 }

@@ -107,6 +107,7 @@
                     <h5 class="card-title">Add Student</h5>
                     <p class="card-text">As an admin, You can add students</p>
                     <a href="{{ route('addStudentPage') }}" class="btn btn-primary">Go to Add Student</a>
+
                 </div>
             </div>
             <div class="card card-centered">
@@ -128,7 +129,7 @@
         </div>
         <div class="card-deck mt-4 mb-4">
             <div class="card card-centered">
-                <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                <img src="dept.gif" class="card-img-top" alt="Card Image 3">
                 <div class="card-body">
                     <h5 class="card-title">Faculties & Departments</h5>
                     <p class="card-text">Find and edit Faculties here. It is easy to update from here</p>
@@ -138,9 +139,17 @@
             <div class="card card-centered">
                 <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
                 <div class="card-body">
-                    <h5 class="card-title">Courses</h5>
-                    <p class="card-text">Create Courses, Course Distributions, edit curriculum from here</p>
-                    <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Go to Courses</a>
+                    <h5 class="card-title">Course Distributions</h5>
+                    <p class="card-text">Distribute courses to teachers from here</p>
+                    <a href="{{ route('courseDistributionPage') }}" class="btn btn-primary">Go to Courses</a>
+                </div>
+            </div>
+            <div class="card card-centered">
+                <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                <div class="card-body">
+                    <h5 class="card-title">Enrollment</h5>
+                    <p class="card-text">Update enrollment details</p>
+                    <a href="{{ route('uploadEnrollmentPage') }}" class="btn btn-primary">Go to Enrollment</a>
                 </div>
             </div>
         </div>
@@ -159,5 +168,5 @@
         <a href="{{ route('addStudentPage') }}" class="btn btn-primary">Add Student</a>
         <a href="{{ route('addTeacherPage') }}" class="btn btn-primary">Add Teacher</a>
         <a href="{{ route('gotoSearch') }}" class="btn btn-primary">Search Model</a>
-        <a href="{{ route('gotoSearchUser') }}" class="btn btn-primary">Search User</a>-->
+        <a href="{{ route('courseDistributionPage') }}" class="btn btn-primary">Search User</a>-->
 @endsection

@@ -18,6 +18,25 @@
             object-fit: cover;
             border-radius: 50%;
         }
+        body {
+            background-color: #FAFAFA;
+        }
+        .card-centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card-img-top {
+            width: 150px;
+            /* Adjust the desired width */
+            height: 150px;
+            /* Adjust the desired height */
+            object-fit: cover;
+            border-radius: 0%;
+        }
     </style>
 @endsection
 
@@ -49,68 +68,94 @@
                             class="img-fluid rounded-circle">
                     </div>
                     <div class="card mb-2">
+
                         <div class="card-header">
                             <h3 class="text-center">Student Profile</h3>
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <!-- Basic Information -->
-                                    <h5>Basic Information</h5>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <p><strong>ID:</strong> {{ $user->uid }}</p>
                                             <p><strong>Name:</strong> {{ $user->name }}</p>
-                                            <p><strong>Level:</strong> {{ $student->level }}</p>
-                                            <p><strong>Semester:</strong> {{ $student->semester }}</p>
-                                            <p><strong>Session:</strong> {{ $student->session }}</p>
-                                            <p><strong>Degree:</strong>
-                                                @foreach ($degrees as $degree)
-                                                    @if ($degree->id == $student->degree)
-                                                        {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $degree->name }}</a>--}}
-                                                        <a href="#">{{ $degree->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </p>
-                                            <p><strong>Faculty:</strong>
-                                                @foreach ($faculties as $faculty)
-                                                    @if ($faculty->id == $student->faculty)
-                                                        <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
-                                                    @endif
-                                                @endforeach
-                                            </p>
-                                            <p><strong>Section:</strong> {{ $student->section }}</p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p><strong>Hall:</strong>
-                                                @foreach ($halls as $hall)
-                                                    @if ($hall->id == $student->hall)
-                                                        {{ $hall->name }}
-                                                    @endif
-                                                @endforeach
-                                            </p>
-                                            <p><strong>Residential Status:</strong> {{ $student->residentialStatus }}</p>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list-group-item">
-                                    <!-- Contact Information -->
-                                    <h5>Contact Information</h5>
-                                    <p><strong>Phone:</strong> {{ $user->mobile }}</p>
-                                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                                </li>
-                                <li class="list-group-item">
-                                    <!-- Address Information -->
-                                    <h5>Address</h5>
-                                    <p><strong>Village:</strong> {{ $address->village }}</p>
-                                    <p><strong>Union:</strong> {{ $address->union }}</p>
-                                    <p><strong>Upazilla:</strong> {{ $address->upazilla }}</p>
-                                    <p><strong>District:</strong> {{ $address->district }}</p>
-                                    <p><strong>Division:</strong> {{ $address->division }}</p>
-                                    <p><strong>Post Code:</strong> {{ $address->postCode }}</p>
-                                </li>
                             </ul>
                         </div>
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    See Details
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <!-- Basic Information -->
+                                        <h5>Basic Information</h5>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><strong>Level:</strong> {{ $student->level }}</p>
+                                                <p><strong>Semester:</strong> {{ $student->semester }}</p>
+                                                <p><strong>Session:</strong> {{ $student->session }}</p>
+                                                <p><strong>Degree:</strong>
+                                                    @foreach ($degrees as $degree)
+                                                        @if ($degree->id == $student->degree)
+                                                            {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $degree->name }}</a>--}}
+                                                            <a href="{{ route('degree', ['degreeID' => $degree->id]) }}">{{ $degree->name }}</a>
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                <p><strong>Faculty:</strong>
+                                                    @foreach ($faculties as $faculty)
+                                                        @if ($faculty->id == $student->faculty)
+                                                            <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                <p><strong>Section:</strong> {{ $student->section }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Hall:</strong>
+                                                    @foreach ($halls as $hall)
+                                                        @if ($hall->id == $student->hall)
+                                                            {{ $hall->name }}
+                                                        @endif
+                                                    @endforeach
+                                                </p>
+                                                <p><strong>Residential Status:</strong> {{ $student->residentialStatus }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <!-- Contact Information -->
+                                        <h5>Contact Information</h5>
+                                        <p><strong>Phone:</strong> {{ $user->mobile }}</p>
+                                        <p><strong>Email:</strong> {{ $user->email }}</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <!-- Address Information -->
+                                        <h5>Address</h5>
+                                        <p><strong>Village:</strong> {{ $address->village }}</p>
+                                        <p><strong>Union:</strong> {{ $address->union }}</p>
+                                        <p><strong>Upazilla:</strong> {{ $address->upazilla }}</p>
+                                        <p><strong>District:</strong> {{ $address->district }}</p>
+                                        <p><strong>Division:</strong> {{ $address->division }}</p>
+                                        <p><strong>Post Code:</strong> {{ $address->postCode }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
                         <div class="card-footer">
                             <?php
                             $r = session()->get('user_role');
@@ -158,6 +203,28 @@
     @else
         <p>No record found for the provided UID.</p>
     @endif
+
+    <div class="container">
+        <div class="card-deck mt-4 mb-4">
+            <div class="card card-centered">
+                <img src="student.gif" class="card-img-top" alt="Card Image 1">
+                <div class="card-body">
+                    <h5 class="card-title">Semester Enrollment</h5>
+                    <p class="card-text">Enroll to semester final exam from here</p>
+                    <a href="{{ route('gotoPaymentPage', ['uid' => $user->uid]) }}" class="btn btn-primary">Enrollment</a>
+
+                </div>
+            </div>
+            <div class="card card-centered">
+                <img src="teacher.gif" class="card-img-top" alt="Card Image 2">
+                <div class="card-body">
+                    <h5 class="card-title">Improve Exam Enrollment</h5>
+                    <p class="card-text">Enroll to specific course's final exam</p>
+                    <a href="{{ route('addTeacherPage') }}" class="btn btn-primary">Enrollment 2</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
             $('#updatePasswordForm').submit(function(e) {

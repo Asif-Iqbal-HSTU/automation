@@ -30,11 +30,21 @@ Route::middleware(['user.auth'])->group(function(){
     //Route::put('/updatePassword', [\App\Http\Controllers\LoginController::class,'updatePassword'])->name('updatePassword');
     Route::get('/selectFaculty',[\App\Http\Controllers\FacultyController::class,'selectFacultyPage'])->name('selectFaculty');
     //Route::post('/faculty',[\App\Http\Controllers\FacultyController::class,'loadFaculty'])->name('faculty');
-    Route::get('/faculty/{facultyID}', [\App\Http\Controllers\FacultyController::class,'facultyPage'])->name('faculty2');
+    Route::get('/faculty/{facultyID}', [\App\Http\Controllers\FacultyController::class,'facultyPage'])->name('faculty2'); //faculty2, here 2 is intentional. you can mean it only "faculty"
     Route::get('/department/{deptID}', [\App\Http\Controllers\DepartmentController::class,'departmentPage'])->name('department');
-
+    Route::get('/gotoPaymentPage/{uid}',[\App\Http\Controllers\EnrollmentController::class,'gotoPaymentPage'])->name('gotoPaymentPage');
+    Route::get('/admitCardDownload',[\App\Http\Controllers\EnrollmentController::class, 'admitCardDownload'])->name('admitCardDownload');
+    //student, teacher
     Route::get('/degree/{degreeID}', [\App\Http\Controllers\DegreeController::class,'degreePage'])->name('degree');
+    Route::get('/coursePage/{courseID}', [\App\Http\Controllers\CourseController::class,'coursePage'])->name('coursePage');
 
+
+    //teacher
+    Route::get('/assigned/{uid}', [\App\Http\Controllers\CourseController::class,'distributedCourseList'])->name('teacherCourses');
+    Route::get('/homehome', [\App\Http\Controllers\TeacherController::class,'gotohome'])->name('basayjao');
+
+
+    Route::post('/createEnrollment', [\App\Http\Controllers\EnrollmentController::class,'addEnrollment'])->name('createEnrollment');
 
     Route::middleware(['user.superAdmin:superAdmin'])->group(function () {
         Route::get('/addStudentPage',[\App\Http\Controllers\UserController::class,'addStudentPage'])->name('addStudentPage');
@@ -59,15 +69,29 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/createCoursePage/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCoursePage'])->name('createCoursePage');
         Route::post('/createCourse/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCourse'])->name('createCourse');
+        Route::get('/courseDistributionPage', [\App\Http\Controllers\CourseController::class,'courseDistributionPage'])->name('courseDistributionPage');
+        Route::post('/courseDistribution', [\App\Http\Controllers\CourseController::class,'addCourseDistribution'])->name('addCourseDistribution');
+
+
+
+        Route::get('/uploadEnrollmentPage', [\App\Http\Controllers\EnrollmentController::class,'gotoEnrollmentUploadPage'])->name('uploadEnrollmentPage');
     });
-
-
 });
 
+Route::get('/example1', [\App\Http\Controllers\SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [\App\Http\Controllers\SslCommerzPaymentController::class, 'exampleHostedCheckout']);
 
+Route::post('/pay/{uid}', [\App\Http\Controllers\SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [\App\Http\Controllers\SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [\App\Http\Controllers\SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [\App\Http\Controllers\SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [\App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [\App\Http\Controllers\SslCommerzPaymentController::class, 'ipn']);
 //Route::get('/addUserPage',[\App\Http\Controllers\UserController::class,'addUserPage'])->name('addUserPage');
 //Route::get('/addStudentPage',[\App\Http\Controllers\UserController::class,'addStudentPage'])->name('addStudentPage');
-//Route::post('/addStudent',[\App\Http\Controllers\UserController::class,'addStudent'])->name('addStudent');
+//Route::post('/addStudent',[\App\Http\Controllers\UserController::class,'0addStudent'])->name('addStudent');
 //Route::get('/addTeacherPage',[\App\Http\Controllers\UserController::class,'addTeacherPage'])->name('addTeacherPage');
 //Route::post('/addTeacher',[\App\Http\Controllers\UserController::class,'addTeacher'])->name('addTeacher');
 

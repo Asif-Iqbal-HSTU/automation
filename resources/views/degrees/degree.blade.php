@@ -49,7 +49,7 @@
                 <h4 class="text-center">Welcome to </h4>
                 <h3 class="text-center">{{ $degree -> name }}</h3>
                 <br>
-                <div class="card">
+                <div class="card w-150">
                     {{--<div class="card-header">
                         <h4 class="">Honorable Chairman:</h4>
                         @foreach ($teachers as $teacher)
@@ -66,8 +66,96 @@
                         <h4 class="">Message from Chairman:</h4>
                         <p>{{ $department -> chairmanMessage }}</p>
                     </div>--}}
-                    <div class="card-body">
+                    <div class="card-header">
+                        <h4>Courses of Different Levels & Semesters:</h4>
+                    </div>
+
+                    {{--L1S1--}}
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Level 1, Semester I
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Course Code</th>
+                                    <th scope="col">Course Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($courses as $course)
+                                    @if ($course->degree == $degree -> id)
+                                        @if($course->level == "1" && $course->semester == "I")
+                                        <tr>
+                                            <td><a href="{{ route('coursePage', ['courseID' => $course->id]) }}">{{ $course->code }}</a> <br></td>
+                                            <td><a href="{{ route('coursePage', ['courseID' => $course->id]) }}">{{ $course->name }}</a> <br></td>
+                                        </tr>
+                                        @endif
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{--L1S2--}}
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Level 1, Semester II
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Course Code</th>
+                                    <th scope="col">Course Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($courses as $course)
+                                    @if ($course->degree == $degree -> id)
+                                        @if($course->level == "1" && $course->semester == "II")
+                                            <tr>
+                                                <td><a href="{{ route('coursePage', ['courseID' => $course->id]) }}">{{ $course->code }}</a> <br></td>
+                                                <td><a href="{{ route('coursePage', ['courseID' => $course->id]) }}">{{ $course->name }}</a> <br></td>
+                                            </tr>
+                                        @endif
+                                    @endif
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {{--<div class="card-body">
                         <h4>Our Courses:</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Course Code</th>
+                                <th scope="col">Course Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($courses as $course)
+                                @if ($course->degree == $degree -> id)
+                                    <tr>
+                                        <td><a href="#">{{ $course->code }}</a> <br></td>
+                                        <td><a href="#">{{ $course->name }}</a> <br></td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
                         <ul class="list-group list-group-flush">
                             @foreach ($courses as $course)
                                 @if ($course->degree == $degree -> id)
@@ -81,7 +169,7 @@
                                 @endif
                             @endforeach
                         </ul>
-                    </div>
+                    </div>--}}
                     {{--<div class="card-footer">
                         <h4 class="">Department Notice:</h4>
                         <p>This is a notice</p>

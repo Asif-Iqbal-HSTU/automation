@@ -42,4 +42,55 @@
             <button type="submit">Search</button>
         </form>
     </div>
+
+
+    <div class="container mt-4">
+        <input type="text" id="filterInput" class="form-control" placeholder="Type to filter">
+        <ul class="list-group mt-2" id="autocompleteList">
+          <!-- Autocomplete suggestions will be inserted here -->
+        </ul>
+      </div>
+      <script>
+        // Sample data for autocomplete
+        const autocompleteData = ["Apple", "Banana", "Cherry", "Date", "Grape", "Lemon", "Orange"];
+
+        // Function to update the autocomplete suggestions based on user input
+        function updateAutocomplete(input) {
+          const autocompleteList = document.getElementById("autocompleteList");
+          autocompleteList.innerHTML = '';
+
+          // Filter the data based on user input
+          const filteredData = autocompleteData.filter(item => item.toLowerCase().includes(input.toLowerCase()));
+
+          // Create and append autocomplete items
+          filteredData.forEach(item => {
+            const autocompleteItem = document.createElement("li");
+            autocompleteItem.classList.add("list-group-item");
+            autocompleteItem.textContent = item;
+            autocompleteList.appendChild(autocompleteItem);
+          });
+        }
+
+        // Event listener for input changes
+        const filterInput = document.getElementById("filterInput");
+        filterInput.addEventListener("input", function () {
+          const inputValue = this.value;
+          updateAutocomplete(inputValue);
+        });
+
+        // Event listener for selecting an autocomplete suggestion
+        const autocompleteList = document.getElementById("autocompleteList");
+        autocompleteList.addEventListener("click", function (event) {
+          const clickedItem = event.target;
+          if (clickedItem.classList.contains("list-group-item")) {
+            // Set the selected suggestion as the input value
+            filterInput.value = clickedItem.textContent;
+            // Clear the autocomplete suggestions
+            autocompleteList.innerHTML = '';
+          }
+        });
+      </script>
+
+
+
 @endsection
