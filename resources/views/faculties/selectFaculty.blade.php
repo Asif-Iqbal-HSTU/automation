@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-    {{--<form action="{{ route('faculty') }}" method="POST">
+    {{-- <form action="{{ route('faculty') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-lg-4">
@@ -36,13 +36,13 @@
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Proceed</button>
-    </form>--}}
-    {{--<div>Faculties in HSTU</div>
+    </form> --}}
+    {{-- <div>Faculties in HSTU</div>
     <div>
         @foreach ($faculties as $faculty)
             <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a> <br>
         @endforeach
-    </div>--}}
+    </div> --}}
     <div class="container">
         <nav class="navbar navbar-dark bg-primary">
             <div class="container-fluid">
@@ -55,7 +55,8 @@
                         <a class="nav-link" href="{{ route('homePage') }}"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}"><i
+                                class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -74,12 +75,22 @@
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-10">
-                                            <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a> <br>
+                                            <a
+                                                href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
+                                            <br>
                                         </div>
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
+                    </div>
+                    <div class="card-footer">
+                        <?php
+                        $r = session()->get('user_role');
+                        ?>
+                        <?php if ($r === "superAdmin"): ?>
+                        <a href="{{route('addFacultyPage')}}" class="btn btn-primary">Add Faculty</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

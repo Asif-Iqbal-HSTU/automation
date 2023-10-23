@@ -45,6 +45,9 @@ Route::middleware(['user.auth'])->group(function(){
 
 
     Route::post('/createEnrollment', [\App\Http\Controllers\EnrollmentController::class,'addEnrollment'])->name('createEnrollment');
+    Route::get('/editStudentSpecifics/{uid}', [\App\Http\Controllers\UserController::class,'editStudentSpecificProperty'])->name('editStudentSpecifics');
+    Route::put('/updateStudentSpecifics/{uid}', [\App\Http\Controllers\UserController::class,'updateStudentSpecificProperty'])->name('updateStudentSpecifics');
+
 
     Route::middleware(['user.superAdmin:superAdmin'])->group(function () {
         Route::get('/addStudentPage',[\App\Http\Controllers\UserController::class,'addStudentPage'])->name('addStudentPage');
@@ -57,13 +60,20 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/editUser/{uid}', [\App\Http\Controllers\UserController::class,'editUser'])->name('editUser');
         Route::put('/updateUser/{uid}', [\App\Http\Controllers\UserController::class,'updateUser'])->name('updateUser');
+        //updateStudentSpecificProperty
+
+
         // routes/web.php
         Route::get('/departments/{faculty}', [\App\Http\Controllers\DepartmentController::class,'getDepartments']);
         Route::get('/degrees/{faculty}', [\App\Http\Controllers\FacultyController::class,'getDegrees']);
 
+        Route::get('/addDepartmentPage/{fID}', [\App\Http\Controllers\DepartmentController::class,'addDepartmentPage'])->name('addDepartmentPage');
+        Route::post('/createDepartment/{fID}', [\App\Http\Controllers\DepartmentController::class,'createDepartment'])->name('createDepartment');
         Route::get('/editDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'editDepartment'])->name('editDepartment');
         Route::put('/updateDepartment/{deptID}', [\App\Http\Controllers\DepartmentController::class,'updateDepartment'])->name('updateDepartment');
 
+        Route::get('/addFacultyPage', [\App\Http\Controllers\FacultyController::class,'addFacultyPage'])->name('addFacultyPage');
+        Route::post('/createFaculty', [\App\Http\Controllers\FacultyController::class,'createFaculty'])->name('createFaculty');
         Route::get('/editFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'editFaculty'])->name('editFaculty');
         Route::put('/updateFaculty/{fID}', [\App\Http\Controllers\FacultyController::class,'updateFaculty'])->name('updateFaculty');
 
@@ -84,7 +94,7 @@ Route::get('/example2', [\App\Http\Controllers\SslCommerzPaymentController::clas
 Route::post('/pay/{uid}', [\App\Http\Controllers\SslCommerzPaymentController::class, 'index']);
 Route::post('/pay-via-ajax', [\App\Http\Controllers\SslCommerzPaymentController::class, 'payViaAjax']);
 
-Route::post('/success', [\App\Http\Controllers\SslCommerzPaymentController::class, 'success']);
+Route::post('/success', [\App\Http\Controllers\SslCommerzPaymentController::class, 'success'])->name('paySuccess');
 Route::post('/fail', [\App\Http\Controllers\SslCommerzPaymentController::class, 'fail']);
 Route::post('/cancel', [\App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
 

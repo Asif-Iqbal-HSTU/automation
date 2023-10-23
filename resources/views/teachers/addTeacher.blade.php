@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <label for="uid" class="form-label">Teacher ID</label>
-                    <input type="text" class="form-control" id="uid" name="uid" placeholder="Enter Teacher ID">
+                    <input type="text" class="form-control" id="uid" name="uid" placeholder="Teacher ID (Auto Generated)" disabled>
                 </div>
                 <div class="col-lg-4">
                     <label for="Full Name" class="form-label">Full Name</label>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="Email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter valid Email Address">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email Address (Auto Generated)" disabled>
                 </div>
             </div>
             <br>
@@ -192,5 +192,37 @@
                     });
                 });
         });
+    </script>
+    <script>
+        // Function to update the Teacher ID based on Full Name
+        function updateTeacherID() {
+            // Get the Full Name input and Teacher ID input elements
+            var fullNameInput = document.getElementById('name');
+            var teacherIDInput = document.getElementById('uid');
+
+            // Get the value entered in the Full Name input
+            var fullName = fullNameInput.value;
+
+            // Split the full name into parts using spaces
+            var nameParts = fullName.split(' ');
+
+            // Check if there are at least two parts (first name and last name)
+            if (nameParts.length >= 2) {
+                // Extract the last name and construct the Teacher ID
+                var lastName = nameParts[nameParts.length - 1];
+                var beforeLastName = nameParts[nameParts.length - 2];
+                var teacherID = beforeLastName + '_' + lastName + '@teacher.hstu.ac.bd';
+
+                // Set the Teacher ID input value
+                teacherIDInput.value = teacherID;
+            } else {
+                // If there are not enough name parts, clear the Teacher ID input
+                teacherIDInput.value = '';
+            }
+        }
+
+        // Attach an event listener to the Full Name input to update the Teacher ID
+        var fullNameInput = document.getElementById('name');
+        fullNameInput.addEventListener('input', updateTeacherID);
     </script>
 @endsection

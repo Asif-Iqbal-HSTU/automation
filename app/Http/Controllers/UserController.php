@@ -225,6 +225,56 @@ class UserController extends Controller
         }
     }
 
+    public function editStudentSpecificProperty($uid)
+    {
+
+        $user = User::where('uid', $uid)->firstOrFail();
+
+        // Retrieve the associated Model2 record using the address attribute of Model1
+        $address = Address::findOrFail($user->address);
+
+        // Retrieve the Model3 record based on the sid
+        // Pass the retrieved data to the view
+        if($user->role == 'student'){
+            $student = Student::where('sid', $uid)->firstOrFail();
+            return view('students.editSpecificProperties', compact('user', 'address', 'student'));
+        }
+        elseif($user->role == 'teacher'){
+            $teacher = teacher::where('tid', $uid)->firstOrFail();
+            return view('students.editSpecificProperties', compact('user', 'address', 'teacher'));
+        }
+    }
+
+
+
+    public function updateStudentSpecificProperty(Request $request, $uid)
+    {
+        $mobile = $request->input('mobile');
+        $email = $request->input('email');
+        $village = $request->input('village');
+        $union = $request->input('union');
+        $upazilla = $request->input('upazilla');
+        $district = $request->input('district');
+        $division = $request->input('division');
+        $postCode = $request->input('postCode');
+
+        $user = User::where('uid', $uid)->firstOrFail();
+        $user->mobile = $mobile;
+        $user->email = $email;
+        $user->save();
+
+        $address = Address::findOrFail($user->address);
+        $address->village = $village;
+        $address->union = $union;
+        $address->upazilla = $upazilla;
+        $address->district = $district;
+        $address->division = $division;
+        $address->postCode = $postCode;
+        $address->save();
+
+        return redirect()->back()->with('success', 'Data updated successfully.');
+    }
+
     public function updateUser(Request $request, $uid)
     {
         $name = $request->input('name');

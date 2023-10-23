@@ -34,6 +34,31 @@ class DepartmentController extends Controller
         return view('departments.editDepartment', compact('department', 'teachers', 'faculties' ));
     }
 
+    public function addDepartmentPage($fID)
+    {
+        //dd($deptID);
+        $teachers = Teacher::all();
+        $faculty = Faculty::where('id', $fID)->firstOrFail();
+        return view('departments.addDepartment', compact('teachers', 'faculty'));
+    }
+
+
+    public function createDepartment(Request $request, $fID)
+    {
+        //dd($deptID);
+        //$department = Department::where('id', $deptID)->firstOrFail();
+        //return view('departments.editDepartment', compact('department'));
+        //$faculty = Faculty::where('id', $fID)->firstOrFail();
+        $address = Department::create([
+            'name' => $request->input('name'),
+            'chairman' => $request->input('chairman'),
+            'chairmanMessage' => $request->input('chairmanMessage'),
+            'faculty' => $fID
+        ]);
+
+        return redirect()->back()->with('success', 'Department added successfully.');
+    }
+
     public function updateDepartment(Request $request, $deptID)
     {
         //dd($deptID);

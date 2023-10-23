@@ -177,6 +177,8 @@
                             <?php if ($r === "teacher"): ?>
                             <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change
                                 Password</a>
+
+                            <a href="{{ route('editStudentSpecifics', ['uid' => $user->uid]) }}" class="btn btn-primary">Edit Profile</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger float-right">Logout</a>
                             <?php endif; ?>
                             <?php if ($r === "superAdmin"): ?>

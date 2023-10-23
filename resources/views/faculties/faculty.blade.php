@@ -115,6 +115,7 @@
                     $r = session()->get('user_role');
                     ?>
                     <?php if ($r === "superAdmin"): ?>
+                    <a href="{{ route('addDepartmentPage', ['fID' => $faculty->id]) }}" class="btn btn-primary">Add Department</a>
                     <form action="{{ route('editFaculty', ['fID' => $faculty->id]) }}" method="GET">
                         @csrf
                         <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}

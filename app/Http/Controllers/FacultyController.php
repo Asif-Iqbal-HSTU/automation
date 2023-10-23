@@ -48,6 +48,30 @@ class FacultyController extends Controller
         return view('faculties.editFaculty', compact('faculty', 'teachers'));
     }
 
+    public function addFacultyPage()
+    {
+        //dd($deptID);
+        $teachers = Teacher::all();
+        return view('faculties.addFaculty', compact('teachers'));
+    }
+
+
+    public function createFaculty(Request $request)
+    {
+        //dd($deptID);
+        //$department = Department::where('id', $deptID)->firstOrFail();
+        //return view('departments.editDepartment', compact('department'));
+        //$faculty = Faculty::where('id', $fID)->firstOrFail();
+        $address = Faculty::create([
+            'name' => $request->input('name'),
+            'dean' => $request->input('dean'),
+            'deanMessage' => $request->input('deanMessage')
+        ]);
+
+        return redirect()->back()->with('success', 'Faculty added successfully.');
+    }
+
+
     public function updateFaculty(Request $request, $fID)
     {
         //dd($deptID);

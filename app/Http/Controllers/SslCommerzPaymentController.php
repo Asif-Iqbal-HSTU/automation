@@ -210,7 +210,7 @@ class SslCommerzPaymentController extends Controller
     public function success(Request $request)
     {
 
-        return view('admitCardPage');
+        //return view('admitCardPage');
 
         echo "Transaction is Successful";
 
@@ -249,11 +249,19 @@ class SslCommerzPaymentController extends Controller
                     ->update(['status' => 'Failed']);
                 echo "validation Fail";
             }
+
+
+            return view('admitCardPage');
+
         } else if ($order_detials->status == 'Processing' || $order_detials->status == 'Complete') {
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
             echo "Transaction is successfully Completed";
+
+
+            return view('admitCardPage');
+
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
             echo "Invalid Transaction";
