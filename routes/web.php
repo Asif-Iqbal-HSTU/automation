@@ -34,6 +34,8 @@ Route::middleware(['user.auth'])->group(function(){
     Route::get('/department/{deptID}', [\App\Http\Controllers\DepartmentController::class,'departmentPage'])->name('department');
     Route::get('/gotoPaymentPage/{uid}',[\App\Http\Controllers\EnrollmentController::class,'gotoPaymentPage'])->name('gotoPaymentPage');
     Route::get('/admitCardDownload',[\App\Http\Controllers\EnrollmentController::class, 'admitCardDownload'])->name('admitCardDownload');
+    Route::get('/notices/{uid}', [\App\Http\Controllers\EnrollmentController::class,'notices'])->name('notices');
+
     //student, teacher
     Route::get('/degree/{degreeID}', [\App\Http\Controllers\DegreeController::class,'degreePage'])->name('degree');
     Route::get('/coursePage/{courseID}', [\App\Http\Controllers\CourseController::class,'coursePage'])->name('coursePage');

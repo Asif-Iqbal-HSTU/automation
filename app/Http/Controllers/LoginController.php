@@ -12,6 +12,8 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Models\Hall;
+use App\Models\Enrollment;
+use Illuminate\Support\Carbon;
 
 class LoginController extends Controller
 {
@@ -60,12 +62,19 @@ class LoginController extends Controller
             $degrees = Degree::all();
             $faculties = Faculty::all();
             $halls = Hall::all();
+            $enrollments = Enrollment::all();
             $uid = $user->uid;
 
             $address = Address::findOrFail($user->address);
             $student = Student::where('sid', $uid)->first();
+            $stuDegree = $student->degree;
+            $stuLevel = $student->level;
+            $stuSemester = $student->semester;
+            $enrollment = Enrollment::where('degree', $stuDegree)->where('level', $stuLevel)->where('semester', $stuSemester)->first();
+            $currentDate = Carbon::now();
+            //dd($enrollment);
             $teacher = Teacher::where('tid', $uid)->first();
-            return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls'));
+            return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls', 'enrollments', 'currentDate'));
         }
 
         if($user->role == 'teacher'){

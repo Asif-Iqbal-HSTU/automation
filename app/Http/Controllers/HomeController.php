@@ -9,8 +9,10 @@ use App\Models\Faculty;
 use App\Models\Hall;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Enrollment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
         $faculties = Faculty::all();
         $degrees = Degree::all();
         $halls = Hall::all();
+        $enrollments = Enrollment::all();
+        $currentDate = Carbon::now();
 
         //$uid = $request->input('uid');
         $uid = $user->uid;
@@ -41,7 +45,7 @@ class HomeController extends Controller
 
             // Pass the retrieved data to the view
             if($user->role == 'student'){
-                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'degrees', 'halls'));
+                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'faculties', 'degrees', 'halls', 'enrollments', 'currentDate'));
             }
             elseif($user->role == 'teacher'){
                 return view('teachers.teacherProfile', compact('user', 'address', 'teacher', 'departments', 'faculties'));

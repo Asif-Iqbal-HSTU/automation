@@ -33,6 +33,8 @@ class EnrollmentController extends Controller
             'creditHourFee' => $request->input('creditHourFee'),
             'totalCreditFee' => $creditFee,
             'otherFees' => $request->input('otherFees'),
+            'start_date' => $request->input('start_date'),
+            'end_date' => $request->input('end_date'),
             'totalSemesterFee' => $totalFee
         ]);
         return redirect()->back()->with('success','Data Added Successfully');
@@ -51,5 +53,13 @@ class EnrollmentController extends Controller
         return $pdf->download('admitCard.pdf');
 
        /* return view('admitCardPage');*/
+    }
+
+    public function notices($uid)
+    {
+        $userC = User::where('uid', $uid)->firstOrFail();
+        $stuC = Student::where('sid', $uid)->firstOrFail();
+        $enrollments = Enrollment::all();
+        return view('enrollments.enrollmentNotices', compact('userC', 'stuC', 'enrollments'));
     }
 }

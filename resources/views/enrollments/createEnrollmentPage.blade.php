@@ -127,6 +127,16 @@
                     <input type="number" class="form-control" id="otherFees" name="otherFees" placeholder="Enter Other Fees">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="start_date" class="form-label">Start Date</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date">
+                </div>
+                <div class="col-lg-6">
+                    <label for="end_date" class="form-label">End Date</label>
+                    <input type="date" class="form-control" id="end_date" name="end_date">
+                </div>
+            </div>
             <br>
             <button class="btn btn-primary" type="submit">Create an Enrollment</button>
         </form>

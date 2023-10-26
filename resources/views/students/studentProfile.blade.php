@@ -12,15 +12,18 @@
             border-radius: 50%;
             margin: 0 auto;
         }
+
         .image-cropper img {
             width: 100%;
             height: auto;
             object-fit: cover;
             border-radius: 50%;
         }
+
         body {
             background-color: #FAFAFA;
         }
+
         .card-centered {
             display: flex;
             flex-direction: column;
@@ -49,11 +52,17 @@
 
                 <!-- Navbar links -->
                 <ul class="navbar-nav ml-auto flex-row">
-                    {{--<li class="nav-item mr-2">
+                    {{-- <li class="nav-item mr-2">
                         <a class="nav-link" href="#"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
-                    </li>--}}
+                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
+                        <a class="nav-link" href="{{ route('notices', ['uid' => $user->uid]) }}"><i
+                                class="fas fa-bell fa-lg"></i>Notices</a>
+                    </li>
+                    &nbsp; &nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"><i
+                                class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
                     </li>
                 </ul>
             </div>
@@ -107,15 +116,17 @@
                                                 <p><strong>Degree:</strong>
                                                     @foreach ($degrees as $degree)
                                                         @if ($degree->id == $student->degree)
-                                                            {{--<a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $degree->name }}</a>--}}
-                                                            <a href="{{ route('degree', ['degreeID' => $degree->id]) }}">{{ $degree->name }}</a>
+                                                            {{-- <a href="{{ route('department', ['deptID' => $department->id]) }}">{{ $degree->name }}</a> --}}
+                                                            <a
+                                                                href="{{ route('degree', ['degreeID' => $degree->id]) }}">{{ $degree->name }}</a>
                                                         @endif
                                                     @endforeach
                                                 </p>
                                                 <p><strong>Faculty:</strong>
                                                     @foreach ($faculties as $faculty)
                                                         @if ($faculty->id == $student->faculty)
-                                                            <a href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
+                                                            <a
+                                                                href="{{ route('faculty2', ['facultyID' => $faculty->id]) }}">{{ $faculty->name }}</a>
                                                         @endif
                                                     @endforeach
                                                 </p>
@@ -129,7 +140,8 @@
                                                         @endif
                                                     @endforeach
                                                 </p>
-                                                <p><strong>Residential Status:</strong> {{ $student->residentialStatus }}</p>
+                                                <p><strong>Residential Status:</strong> {{ $student->residentialStatus }}
+                                                </p>
                                             </div>
                                         </div>
                                     </li>
@@ -161,8 +173,10 @@
                             $r = session()->get('user_role');
                             ?>
                             <?php if ($r === "student"): ?>
-                            <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change Password</a>
-                            <a href="{{ route('editStudentSpecifics', ['uid' => $user->uid]) }}" class="btn btn-primary">Edit Profile</a>
+                            <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change
+                                Password</a>
+                            <a href="{{ route('editStudentSpecifics', ['uid' => $user->uid]) }}"
+                                class="btn btn-primary">Edit Profile</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger float-right">Logout</a>
                             <?php endif; ?>
                             <?php if ($r === "superAdmin"): ?>
@@ -177,55 +191,61 @@
                 </div>
             </div>
         </div>
+        @foreach ($enrollments as $enrollment)
+            @if (
+                $enrollment->degree == $student->degree &&
+                    $enrollment->level == $student->level &&
+                    $enrollment->semester == $student->semester)
+                @if ($currentDate >= $enrollment->start_date && $currentDate <= $enrollment->end_date)
+                    <div class="container">
+                        <div class="card-deck mt-4 mb-4">
+                            <div class="card card-centered">
+                                <img src="student.gif" class="card-img-top" alt="Card Image 1">
+                                <div class="card-body">
+                                    <h5 class="card-title">Semester Enrollment</h5>
+                                    <p class="card-text">Enroll to semester final exam from here</p>
+                                    <a href="{{ route('gotoPaymentPage', ['uid' => $user->uid]) }}"
+                                        class="btn btn-primary">Enrollment</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
+        @endforeach
         <!--<h1>{{ $user->role }} Profile</h1>
-                                <p>UID: {{ $user->uid }}</p>
-                                <p>Name: {{ $user->name }}</p>
-                                <p>District: {{ $address->district }}</p>
-                                <p>Division: {{ $address->division }}</p>
-                                <p>Level: {{ $student->level }}</p>
-                                <p>Semester: {{ $student->semester }}</p>
-                                <p>Department:
-                                    @foreach ($departments as $department)
+                                                    <p>UID: {{ $user->uid }}</p>
+                                                    <p>Name: {{ $user->name }}</p>
+                                                    <p>District: {{ $address->district }}</p>
+                                                    <p>Division: {{ $address->division }}</p>
+                                                    <p>Level: {{ $student->level }}</p>
+                                                    <p>Semester: {{ $student->semester }}</p>
+                                                    <p>Department:
+                                                        @foreach ($departments as $department)
     @if ($department->id == $student->department)
     {{ $department->name }}
     @endif
     @endforeach
-                                </p>
+                                                    </p>
 
-                                <?php
-                                $r = session()->get('user_role');
-                                ?>
-                                <?php if ($r === "superAdmin"): ?>
-                                <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
-                                    @csrf
-                                    <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
-                                </form>
-                                <?php endif; ?>-->
+                                                    <?php
+                                                    $r = session()->get('user_role');
+                                                    ?>
+                                                    <?php if ($r === "superAdmin"): ?>
+                                                    <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
+                                                        @csrf
+                                                        <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
+                                                    </form>
+                                                    <?php endif; ?>-->
     @else
         <p>No record found for the provided UID.</p>
     @endif
 
-    <div class="container">
-        <div class="card-deck mt-4 mb-4">
-            <div class="card card-centered">
-                <img src="student.gif" class="card-img-top" alt="Card Image 1">
-                <div class="card-body">
-                    <h5 class="card-title">Semester Enrollment</h5>
-                    <p class="card-text">Enroll to semester final exam from here</p>
-                    <a href="{{ route('gotoPaymentPage', ['uid' => $user->uid]) }}" class="btn btn-primary">Enrollment</a>
 
-                </div>
-            </div>
-            <div class="card card-centered">
-                <img src="teacher.gif" class="card-img-top" alt="Card Image 2">
-                <div class="card-body">
-                    <h5 class="card-title">Improve Exam Enrollment</h5>
-                    <p class="card-text">Enroll to specific course's final exam</p>
-                    <a href="{{ route('addTeacherPage') }}" class="btn btn-primary">Enrollment 2</a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+
     <script>
         $(document).ready(function() {
             $('#updatePasswordForm').submit(function(e) {
@@ -240,7 +260,7 @@
                         // Password updated successfully
                         $('.modal-body').prepend(
                             '<div class="alert alert-success">Password updated successfully!</div>'
-                            );
+                        );
                         form[0].reset();
                     },
                     error: function(xhr) {

@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('enrollmentnotices', function (Blueprint $table) {
             $table->id();
             $table->string('degree');
             $table->string('level');
             $table->string('semester');
-            $table->integer('totalCreditHour');
-            $table->integer('creditHourFee');
-            $table->integer('totalCreditFee')->nullable();
-            $table->integer('otherFees');
-            $table->integer('totalSemesterFee')->nullable();
+            $table->string('message')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('enrollmentnotices');
     }
 };
