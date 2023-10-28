@@ -95,7 +95,7 @@
                 </div><br>
                 <div class="col-lg-4">
                     <label for="Current Level" class="form-label">Level</label>
-                    <select class="form-select" aria-label=".form-select-lg example" name="level">
+                    <select class="form-select" aria-label=".form-select-lg example" name="level" id="level">
                         <option selected>Open this select menu</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -106,7 +106,7 @@
                 </div><br>
                 <div class="col-lg-4">
                     <label for="Current Semester" class="form-label">Semester</label>
-                    <select class="form-select" aria-label="Default select example" name="semester">
+                    <select class="form-select" aria-label="Default select example" name="semester" id="semester">
                         <option selected>Open this select menu</option>
                         <option value="I">I</option>
                         <option value="II">II</option>
@@ -136,10 +136,44 @@
                     <label for="end_date" class="form-label">End Date</label>
                     <input type="date" class="form-control" id="end_date" name="end_date">
                 </div>
+                <div class="col-lg-4">
+                    <label for="notice" class="form-label">Notice</label>
+                    <input type="text" class="form-control" id="notice" name="notice" placeholder="Notice (auto generated)">
+                </div>
             </div>
             <br>
             <button class="btn btn-primary" type="submit">Create an Enrollment</button>
         </form>
     </div>
+
+    <script>
+        // Get references to the select elements and the notice input field
+        var degreeSelect = document.getElementById('degree');
+        var levelSelect = document.getElementById('level');
+        var semesterSelect = document.getElementById('semester');
+        var startDateInput = document.getElementById('start_date');
+        var endDateInput = document.getElementById('end_date');
+        var noticeInput = document.getElementById('notice');
+
+        // Add event listeners to trigger notice generation
+        degreeSelect.addEventListener('change', generateNotice);
+        levelSelect.addEventListener('change', generateNotice);
+        semesterSelect.addEventListener('change', generateNotice);
+        startDateInput.addEventListener('change', generateNotice);
+        endDateInput.addEventListener('change', generateNotice);
+
+        // Function to generate the notice
+        function generateNotice() {
+            var degree = degreeSelect.options[degreeSelect.selectedIndex].text;
+            var level = levelSelect.options[levelSelect.selectedIndex].text;
+            var semester = semesterSelect.options[semesterSelect.selectedIndex].text;
+            var startDate = startDateInput.value;
+            var endDate = endDateInput.value;
+
+            var notice = `Enrollment for ${degree}, level ${level}, and semester ${semester} is open from ${startDate} to ${endDate}.`;
+
+            noticeInput.value = notice;
+        }
+    </script>
 
 @endsection

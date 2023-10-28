@@ -71,12 +71,12 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            @foreach ($enrollments as $enrollment)
-                                @if ($enrollment->degree == $stuC->degree)
+                            @foreach ($distributions as $distribution)
+                                @if ($distribution->teacher == $teacherC->id)
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-md-10">
-                                                {{ $enrollment->notice }}
+                                                {{ $distribution->id }}
                                                 <br>
                                             </div>
                                         </div>

@@ -45,28 +45,28 @@
 
 <!--@section('titleContent')
     <title>Super Admin Dashboard Page</title>
-                        <style>
-                            body {
-                                background-color: #FAFAFA;
-                            }
+                                    <style>
+                                        body {
+                                            background-color: #FAFAFA;
+                                        }
 
-                            .card-centered {
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                                justify-content: center;
-                                text-align: center;
-                            }
+                                        .card-centered {
+                                            display: flex;
+                                            flex-direction: column;
+                                            align-items: center;
+                                            justify-content: center;
+                                            text-align: center;
+                                        }
 
-                            .card-img-top {
-                                width: 150px;
-                                /* Adjust the desired width */
-                                height: 150px;
-                                /* Adjust the desired height */
-                                object-fit: cover;
-                                border-radius: 50%;
-                            }
-                        </style>
+                                        .card-img-top {
+                                            width: 150px;
+                                            /* Adjust the desired width */
+                                            height: 150px;
+                                            /* Adjust the desired height */
+                                            object-fit: cover;
+                                            border-radius: 50%;
+                                        }
+                                    </style>
 @endsection-->
 
 @section('content')
@@ -81,6 +81,11 @@
                     {{-- <li class="nav-item mr-2">
                     <a class="nav-link" href="#"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
                 </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('teacherNotices', ['uid' => $user->uid]) }}"><i
+                                class="fas fa-bell fa-lg"></i>Notices</a>
+                    </li>
+                    &nbsp; &nbsp;
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"><i
                                 class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
@@ -178,7 +183,8 @@
                             <a href="{{ route('editPassword', ['uid' => $user->uid]) }}" class="btn btn-primary">Change
                                 Password</a>
 
-                            <a href="{{ route('editStudentSpecifics', ['uid' => $user->uid]) }}" class="btn btn-primary">Edit Profile</a>
+                            <a href="{{ route('editStudentSpecifics', ['uid' => $user->uid]) }}"
+                                class="btn btn-primary">Edit Profile</a>
                             <a href="{{ route('logout') }}" class="btn btn-danger float-right">Logout</a>
                             <?php endif; ?>
                             <?php if ($r === "superAdmin"): ?>
@@ -197,20 +203,20 @@
 
 
         <!--<h1>{{ $user->role }} Profile</h1>
-                            <p>UID: {{ $user->uid }}</p>
-                            <p>Name: {{ $user->name }}</p>
-                            <p>District: {{ $address->district }}</p>
-                            <p>Division: {{ $address->division }}</p>
-                            <p>Designation: {{ $teacher->designation }}</p>
-                            <?php
-                            $r = session()->get('user_role');
-                            ?>
-                            <?php if ($r === "superAdmin"): ?>
-                            <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
-                                @csrf
-                                <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
-                            </form>
-                            <?php endif; ?>-->
+                                        <p>UID: {{ $user->uid }}</p>
+                                        <p>Name: {{ $user->name }}</p>
+                                        <p>District: {{ $address->district }}</p>
+                                        <p>Division: {{ $address->division }}</p>
+                                        <p>Designation: {{ $teacher->designation }}</p>
+                                        <?php
+                                        $r = session()->get('user_role');
+                                        ?>
+                                        <?php if ($r === "superAdmin"): ?>
+                                        <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
+                                            @csrf
+                                            <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
+                                        </form>
+                                        <?php endif; ?>-->
     @else
         <p>No record found for the provided UID.</p>
     @endif
@@ -226,7 +232,36 @@
 
                 </div>
             </div>
+            @foreach ($departments as $department)
+                @if ($department->id == $teacher->department)
+                    @if ($department->chairman == $teacher->id)
+                        <div class="card card-centered">
+                            <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Course Distributions</h5>
+                                <p class="card-text">Distribute courses to teachers from here</p>
+                                <a href="{{ route('courseDistributionPage') }}" class="btn btn-primary">Go to Courses</a>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+            @endforeach
+            @foreach ($faculties as $faculty)
+                @if ($faculty->id == $teacher->faculty)
+                    @if ($faculty->dean == $teacher->id)
+                        <div class="card card-centered">
+                            <img src="addUser.gif" class="card-img-top" alt="Card Image 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Enrollment</h5>
+                                <p class="card-text">Update enrollment details</p>
+                                <a href="{{ route('uploadEnrollmentPage') }}" class="btn btn-primary">Go to Enrollment</a>
+                            </div>
+                        </div>
+                    @endif
+                @endif
+            @endforeach
         </div>
+
     </div>
 
 @endsection

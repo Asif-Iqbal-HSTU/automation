@@ -17,12 +17,22 @@
                         <a class="nav-link" href="{{ route('homePage') }}"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}"><i
+                                class="fa-solid fa-arrow-right-from-bracket fa-lg"></i>Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3">
+            <h4 class="text-center">Search Users</h4>
+            <h3 class="text-center">You can search any users and Edit there credentials from here</h3>
+            <br>
+        </div>
+    </div>
+
     <div class="container">
         <form action="{{ route('searchUser') }}" method="POST">
             @csrf
@@ -37,60 +47,15 @@
                     {{ \Illuminate\Support\Facades\Session::get('success') }}
                 </div>
             @endif
-            <div>Enter UID to search:</div>
-            <input type="text" name="uid" placeholder="Enter UID">
-            <button type="submit">Search</button>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="Phone No." class="form-label">Enter UID to search:</label>
+                    <input type="text" class="form-control" id="uid" placeholder="Enter UID" name="uid">
+                </div>
+            </div>
+            </br>
+            <button class="btn btn-primary" type="submit">Search</button>
         </form>
     </div>
-
-
-    <div class="container mt-4">
-        <input type="text" id="filterInput" class="form-control" placeholder="Type to filter">
-        <ul class="list-group mt-2" id="autocompleteList">
-          <!-- Autocomplete suggestions will be inserted here -->
-        </ul>
-      </div>
-      <script>
-        // Sample data for autocomplete
-        const autocompleteData = ["Apple", "Banana", "Cherry", "Date", "Grape", "Lemon", "Orange"];
-
-        // Function to update the autocomplete suggestions based on user input
-        function updateAutocomplete(input) {
-          const autocompleteList = document.getElementById("autocompleteList");
-          autocompleteList.innerHTML = '';
-
-          // Filter the data based on user input
-          const filteredData = autocompleteData.filter(item => item.toLowerCase().includes(input.toLowerCase()));
-
-          // Create and append autocomplete items
-          filteredData.forEach(item => {
-            const autocompleteItem = document.createElement("li");
-            autocompleteItem.classList.add("list-group-item");
-            autocompleteItem.textContent = item;
-            autocompleteList.appendChild(autocompleteItem);
-          });
-        }
-
-        // Event listener for input changes
-        const filterInput = document.getElementById("filterInput");
-        filterInput.addEventListener("input", function () {
-          const inputValue = this.value;
-          updateAutocomplete(inputValue);
-        });
-
-        // Event listener for selecting an autocomplete suggestion
-        const autocompleteList = document.getElementById("autocompleteList");
-        autocompleteList.addEventListener("click", function (event) {
-          const clickedItem = event.target;
-          if (clickedItem.classList.contains("list-group-item")) {
-            // Set the selected suggestion as the input value
-            filterInput.value = clickedItem.textContent;
-            // Clear the autocomplete suggestions
-            autocompleteList.innerHTML = '';
-          }
-        });
-      </script>
-
-
-
 @endsection

@@ -7,6 +7,7 @@ use App\Models\Degree;
 use App\Models\Enrollment;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Teacher;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class EnrollmentController extends Controller
@@ -35,7 +36,8 @@ class EnrollmentController extends Controller
             'otherFees' => $request->input('otherFees'),
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
-            'totalSemesterFee' => $totalFee
+            'totalSemesterFee' => $totalFee,
+            'notice' => $request->input('notice')
         ]);
         return redirect()->back()->with('success','Data Added Successfully');
     }
@@ -59,6 +61,7 @@ class EnrollmentController extends Controller
     {
         $userC = User::where('uid', $uid)->firstOrFail();
         $stuC = Student::where('sid', $uid)->firstOrFail();
+        //$teacherC = Teacher::where('tid', $uid)->firstOrFail();
         $enrollments = Enrollment::all();
         return view('enrollments.enrollmentNotices', compact('userC', 'stuC', 'enrollments'));
     }

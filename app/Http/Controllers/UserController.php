@@ -12,6 +12,8 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use App\Models\Hall;
+use App\Models\Enrollment;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -176,6 +178,8 @@ class UserController extends Controller
         $degrees = Degree::all();
         $faculties = Faculty::all();
         $halls = Hall::all();
+        $enrollments = Enrollment::all();
+        $currentDate = Carbon::now();
 
         $uid = $request->input('uid');
 
@@ -190,7 +194,7 @@ class UserController extends Controller
 
             // Pass the retrieved data to the view
             if($user->role == 'student'){
-                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls'));
+                return view('students.studentProfile', compact('user', 'address', 'student', 'departments', 'degrees', 'faculties', 'halls', 'enrollments', 'currentDate'));
             }
             elseif($user->role == 'teacher'){
                 return view('teachers.teacherProfile', compact('user', 'address', 'teacher', 'departments', 'faculties'));

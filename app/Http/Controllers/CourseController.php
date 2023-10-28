@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Degree;
 use App\Models\Teacher;
 use App\Models\CourseDistribution;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -72,6 +73,15 @@ class CourseController extends Controller
         $teacherID = $uid;
         $courses = CourseDistribution::where('teacher', $teacherID)->get();
         return view('teachers.assignedCourses', compact('courses', 'teacherID'));
+    }
+
+    public function distributionNotices($uid)
+    {
+        $userC = User::where('uid', $uid)->firstOrFail();
+        //$stuC = Student::where('sid', $uid)->firstOrFail();
+        $teacherC = Teacher::where('tid', $uid)->firstOrFail();
+        $distributions = CourseDistribution::all();
+        return view('courses.courseDistNotices', compact('userC', 'teacherC', 'distributions'));
     }
 
 }

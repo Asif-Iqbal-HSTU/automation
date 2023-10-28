@@ -35,6 +35,7 @@ Route::middleware(['user.auth'])->group(function(){
     Route::get('/gotoPaymentPage/{uid}',[\App\Http\Controllers\EnrollmentController::class,'gotoPaymentPage'])->name('gotoPaymentPage');
     Route::get('/admitCardDownload',[\App\Http\Controllers\EnrollmentController::class, 'admitCardDownload'])->name('admitCardDownload');
     Route::get('/notices/{uid}', [\App\Http\Controllers\EnrollmentController::class,'notices'])->name('notices');
+    Route::get('/teacherNotices/{uid}', [\App\Http\Controllers\CourseController::class,'distributionNotices'])->name('teacherNotices');
 
     //student, teacher
     Route::get('/degree/{degreeID}', [\App\Http\Controllers\DegreeController::class,'degreePage'])->name('degree');
@@ -45,10 +46,15 @@ Route::middleware(['user.auth'])->group(function(){
     Route::get('/assigned/{uid}', [\App\Http\Controllers\CourseController::class,'distributedCourseList'])->name('teacherCourses');
     Route::get('/homehome', [\App\Http\Controllers\TeacherController::class,'gotohome'])->name('basayjao');
 
-
+    Route::get('/uploadEnrollmentPage', [\App\Http\Controllers\EnrollmentController::class,'gotoEnrollmentUploadPage'])->name('uploadEnrollmentPage');
     Route::post('/createEnrollment', [\App\Http\Controllers\EnrollmentController::class,'addEnrollment'])->name('createEnrollment');
     Route::get('/editStudentSpecifics/{uid}', [\App\Http\Controllers\UserController::class,'editStudentSpecificProperty'])->name('editStudentSpecifics');
     Route::put('/updateStudentSpecifics/{uid}', [\App\Http\Controllers\UserController::class,'updateStudentSpecificProperty'])->name('updateStudentSpecifics');
+
+
+
+    Route::get('/courseDistributionPage', [\App\Http\Controllers\CourseController::class,'courseDistributionPage'])->name('courseDistributionPage');
+    Route::post('/courseDistribution', [\App\Http\Controllers\CourseController::class,'addCourseDistribution'])->name('addCourseDistribution');
 
 
     Route::middleware(['user.superAdmin:superAdmin'])->group(function () {
@@ -81,12 +87,12 @@ Route::middleware(['user.auth'])->group(function(){
 
         Route::get('/createCoursePage/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCoursePage'])->name('createCoursePage');
         Route::post('/createCourse/{degreeID}', [\App\Http\Controllers\CourseController::class,'createCourse'])->name('createCourse');
-        Route::get('/courseDistributionPage', [\App\Http\Controllers\CourseController::class,'courseDistributionPage'])->name('courseDistributionPage');
-        Route::post('/courseDistribution', [\App\Http\Controllers\CourseController::class,'addCourseDistribution'])->name('addCourseDistribution');
+        //Route::get('/courseDistributionPage', [\App\Http\Controllers\CourseController::class,'courseDistributionPage'])->name('courseDistributionPage');
+        //Route::post('/courseDistribution', [\App\Http\Controllers\CourseController::class,'addCourseDistribution'])->name('addCourseDistribution');
 
 
 
-        Route::get('/uploadEnrollmentPage', [\App\Http\Controllers\EnrollmentController::class,'gotoEnrollmentUploadPage'])->name('uploadEnrollmentPage');
+        //Route::get('/uploadEnrollmentPage', [\App\Http\Controllers\EnrollmentController::class,'gotoEnrollmentUploadPage'])->name('uploadEnrollmentPage');
     });
 });
 

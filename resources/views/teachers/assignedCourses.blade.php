@@ -31,8 +31,8 @@
             </div>
             <div class="container">
                 <div class="row mt-4">
-                    <div class="col-md-6 offset-md-3">
-                        <div class="card w-200">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card w-300">
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead>

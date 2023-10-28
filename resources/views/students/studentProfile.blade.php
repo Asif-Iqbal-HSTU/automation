@@ -55,10 +55,21 @@
                     {{-- <li class="nav-item mr-2">
                         <a class="nav-link" href="#"><i class="fa-solid fa-house-user fa-lg"></i>Home</a>
                     </li> --}}
+
+
+                    <?php
+                    $r = session()->get('user_role');
+                    ?>
+                    <?php if ($r === "student"): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('notices', ['uid' => $user->uid]) }}"><i
                                 class="fas fa-bell fa-lg"></i>Notices</a>
                     </li>
+                    <?php endif; ?>
+                    <?php if ($r === "superAdmin"): ?>
+
+                    <?php endif; ?>
+
                     &nbsp; &nbsp;
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('logout') }}"><i
@@ -191,6 +202,7 @@
                 </div>
             </div>
         </div>
+        <?php if ($r === "student"): ?>
         @foreach ($enrollments as $enrollment)
             @if (
                 $enrollment->degree == $student->degree &&
@@ -214,30 +226,32 @@
                 @endif
             @endif
         @endforeach
+        <?php endif; ?>
+
         <!--<h1>{{ $user->role }} Profile</h1>
-                                                    <p>UID: {{ $user->uid }}</p>
-                                                    <p>Name: {{ $user->name }}</p>
-                                                    <p>District: {{ $address->district }}</p>
-                                                    <p>Division: {{ $address->division }}</p>
-                                                    <p>Level: {{ $student->level }}</p>
-                                                    <p>Semester: {{ $student->semester }}</p>
-                                                    <p>Department:
-                                                        @foreach ($departments as $department)
+                                                            <p>UID: {{ $user->uid }}</p>
+                                                            <p>Name: {{ $user->name }}</p>
+                                                            <p>District: {{ $address->district }}</p>
+                                                            <p>Division: {{ $address->division }}</p>
+                                                            <p>Level: {{ $student->level }}</p>
+                                                            <p>Semester: {{ $student->semester }}</p>
+                                                            <p>Department:
+                                                                @foreach ($departments as $department)
     @if ($department->id == $student->department)
     {{ $department->name }}
     @endif
     @endforeach
-                                                    </p>
+                                                            </p>
 
-                                                    <?php
-                                                    $r = session()->get('user_role');
-                                                    ?>
-                                                    <?php if ($r === "superAdmin"): ?>
-                                                    <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
-                                                        @csrf
-                                                        <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
-                                                    </form>
-                                                    <?php endif; ?>-->
+                                                            <?php
+                                                            $r = session()->get('user_role');
+                                                            ?>
+                                                            <?php if ($r === "superAdmin"): ?>
+                                                            <form action="{{ route('editUser', ['uid' => $user->uid]) }}" method="GET">
+                                                                @csrf
+                                                                <button type="submit" {{ $r == 'student' ? 'disabled' : '' }}>Edit</button>
+                                                            </form>
+                                                            <?php endif; ?>-->
     @else
         <p>No record found for the provided UID.</p>
     @endif

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('totalSemesterFee')->nullable();
             $table->date('start_date'); // Add the start_date field
             $table->date('end_date');
+            $table->string('notice');
             $table->timestamps();
         });
     }
